@@ -2,7 +2,6 @@ const User = require('../models/user.model.js');
 
 // Create and Save a new User
 exports.create = (req, res) => {
-    console.log(req.body);
     // Validate request
     if(!req.body.name) {
         return res.status(400).send({
@@ -22,6 +21,18 @@ exports.create = (req, res) => {
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while creating user."
+        });
+    });
+};
+
+// Retrieve and return all users from the database.
+exports.findAll = (req, res) => {
+    User.find()
+    .then(users => {
+        res.send(users);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving users."
         });
     });
 };

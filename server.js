@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
     res.json({"message": "Welcome to Todo App."});
 });
 
-// Require Notes routes
+// Require User routes
 require('./app/routes/user.routes.js')(app);
 
 // listen for requests
