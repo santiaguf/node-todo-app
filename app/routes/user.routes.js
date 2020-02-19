@@ -13,6 +13,6 @@ module.exports = (app) => {
     // Update a User with userId
     app.put('/users/:userId', users.update);
 
-    // // Delete a User with userId
-    // app.delete('/users/:userId', users.delete);
+    // Delete a User with userId
+    app.delete('/users/:userId', users.delete);
 }
