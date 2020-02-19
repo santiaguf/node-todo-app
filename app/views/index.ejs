@@ -21,11 +21,11 @@
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-body">
-                        <form action="/add" method="post">
+                        <form method="post">
                             <div class="form-group">
                                 <input class="form-control" type="text" name="name" placeholder="Name">
                             </div>
-                            <button class="btn btn-primary" type="submit">
+                            <button class="btn btn-primary" type="submit" onclick="saveUser()">
               Add
             </button>
                         </form>
@@ -38,36 +38,50 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>N°</th>
-                            <th>ID</th>
                             <th>Name</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <% for(var i=0; i < users.length; i++) { %>
-                            <tr>
-                                <td>
-                                    <%= i + 1%>
-                                </td>
-                                <td><strong><%= users[i].name %></strong></td>
-                                <td>
-                                    <!--<a class="<%= users[i].status ? 'btn btn-success' : 'btn btn-dark'%>" href="/turn/<%= users[i]._id %>">Done</a>-->
-                                    <a href="/delete/<%= users[i]._id %>" class="btn btn-danger">
-                  Delete
-                </a>
-                                    <a href="/edit/<%= users[i]._id %>" class="btn btn-info">
-                  Edit
-                </a>
-                                </td>
-                            </tr>
-                            <% } %>
+                    <tbody id="authors2">
                     </tbody>
                 </table>
 
             </div>
         </div>
 
+        <div class="row">
+            <h1>Authors</h1>
+            <ul id="authors"></ul>
+        </div>
+
     </div>
+    <script type="text/javascript">
+        //first we get all users
+        function createNode(element) {
+            return document.createElement(element);
+        }
+    
+        function append(parent, el) {
+            return parent.appendChild(el);
+        }
+    
+        const tbody = document.getElementById('authors2');
+        const url = 'http://localhost:3005/users';
+        fetch(url)
+        .then((resp) => resp.json())
+        .then(function(data) {
+            let authors = data;
+            return authors.map(function(author) {
+            let tr = createNode('tr'),
+                td = createNode('td');
+            td.innerHTML = `${author.name}`;
+            append(tr, td);
+            append(tbody, tr);
+            })
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+    </script>
 
 </body>
 

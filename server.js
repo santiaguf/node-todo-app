@@ -39,6 +39,9 @@ app.get('/', (req, res) => {
 // Require User routes
 require('./app/routes/user.routes.js')(app);
 
+// Require Task routes
+require('./app/routes/task.routes.js')(app);
+
 // listen for requests
 app.listen(3005, () => {
     console.log("Server is listening on port 3005");
