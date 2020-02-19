@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Todo App</title>
+    <!-- BOOTSTRAP CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <a class="navbar-brand" href="#">Todo App</a>
+    </nav>
+
+    <div class="container">
+
+        <div class="row">
+            <!--FORM-->
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/add" method="post">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="name" placeholder="Name">
+                            </div>
+                            <button class="btn btn-primary" type="submit">
+              Add
+            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LIST -->
+            <div class="col-md-7">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i=0; i < users.length; i++) { %>
+                            <tr>
+                                <td>
+                                    <%= i + 1%>
+                                </td>
+                                <td><strong><%= users[i].name %></strong></td>
+                                <td>
+                                    <!--<a class="<%= users[i].status ? 'btn btn-success' : 'btn btn-dark'%>" href="/turn/<%= users[i]._id %>">Done</a>-->
+                                    <a href="/delete/<%= users[i]._id %>" class="btn btn-danger">
+                  Delete
+                </a>
+                                    <a href="/edit/<%= users[i]._id %>" class="btn btn-info">
+                  Edit
+                </a>
+                                </td>
+                            </tr>
+                            <% } %>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>    

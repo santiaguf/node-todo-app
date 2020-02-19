@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 // create express app
 const app = express();
@@ -9,6 +10,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
+
+//settings for Ejs
+app.set('views', path.join(__dirname + '/app/views'));
+app.set('view engine', 'ejs');
 
 // Configuring the database
 const dbConfig = require('./config/database.config.js');
