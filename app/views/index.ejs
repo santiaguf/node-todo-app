@@ -62,7 +62,7 @@
             }
         
             const tbody = document.getElementById('users_list');
-            const url = 'http://localhost:3005/users';
+            const url = '/users';
             fetch(url)
             .then((resp) => resp.json())
             .then(function(data) {
@@ -108,7 +108,7 @@
             redirect: 'follow'
             };
 
-            fetch("http://localhost:3005/users", requestOptions)
+            fetch("/users", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -129,7 +129,7 @@
             redirect: 'follow'
             };
 
-            fetch("http://localhost:3005/users/"+user_id, requestOptions)
+            fetch("/users/"+user_id, requestOptions)
             .then(response => response.text())
             .then(result => location.reload())
             .catch(error => console.log('error', error));
