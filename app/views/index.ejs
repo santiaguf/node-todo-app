@@ -23,11 +23,9 @@
                     <div class="card-body">
                         <form method="post">
                             <div class="form-group">
-                                <input class="form-control" type="text" name="name" placeholder="Name">
+                                <input class="form-control" type="text" name="name" id="user_name" placeholder="Name">
                             </div>
-                            <button class="btn btn-primary" type="submit" onclick="saveUser()">
-              Add
-            </button>
+                            <button class="btn btn-success" onclick="saveUser()">save</button>
                         </form>
                     </div>
                 </div>
@@ -38,49 +36,106 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
+                            <th>N°</th>
                             <th>Name</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody id="authors2">
+                    <tbody id="users_list">
                     </tbody>
                 </table>
-
             </div>
-        </div>
-
-        <div class="row">
-            <h1>Authors</h1>
-            <ul id="authors"></ul>
         </div>
 
     </div>
     <script type="text/javascript">
-        //first we get all users
-        function createNode(element) {
-            return document.createElement(element);
-        }
-    
-        function append(parent, el) {
-            return parent.appendChild(el);
-        }
-    
-        const tbody = document.getElementById('authors2');
-        const url = 'http://localhost:3005/users';
-        fetch(url)
-        .then((resp) => resp.json())
-        .then(function(data) {
-            let authors = data;
-            return authors.map(function(author) {
-            let tr = createNode('tr'),
-                td = createNode('td');
-            td.innerHTML = `${author.name}`;
-            append(tr, td);
-            append(tbody, tr);
+        
+        //list users
+        function listUsers(){
+
+            function createNode(element) {
+                return document.createElement(element);
+            }
+        
+            function append(parent, el) {
+                return parent.appendChild(el);
+            }
+        
+            const tbody = document.getElementById('users_list');
+            const url = 'http://localhost:3005/users';
+            fetch(url)
+            .then((resp) => resp.json())
+            .then(function(data) {
+                let users_list = data;
+                let totalUsers = 0;
+                return users_list.map(function(author) {
+                totalUsers++;    
+                let tr = createNode('tr'),
+                    td = createNode('td'),
+                    td2 = createNode('td');
+                    td3 = createNode('td');
+                //put content on TD elements    
+                td.innerHTML = `${totalUsers}`;
+                td2.innerHTML = `${author.name}`;
+                td3.innerHTML = `
+                <a href="/users-ui/tasklist/${author._id}" class="btn btn-info">Tasks</a> 
+                <a href="/users-ui/edit/${author._id}" class="btn btn-warning">Edit</a> 
+                <a href="#" class="btn btn-danger" onclick="deleteUser('${author._id}')">Delete</a>`;
+                //append TD on TR
+                append(tr, td);
+                append(tr, td2);
+                append(tr, td3);
+                append(tbody, tr);
+                })
             })
-        })
-        .catch(function(error) {
-            console.log(error);
-        });
+            .catch(function(error) {
+                console.log(error);
+            });
+        }
+
+        //save a user
+        function saveUser(){          
+            let user_name = document.getElementById('user_name').value 
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({"name":user_name});
+
+            var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+            };
+
+            fetch("http://localhost:3005/users", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+        }
+
+        //delete a user
+        function deleteUser(user_id){
+            console.log("velo");
+            console.log(user_id);
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = "";
+            var requestOptions = {
+            method: 'DELETE',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+            };
+
+            fetch("http://localhost:3005/users/"+user_id, requestOptions)
+            .then(response => response.text())
+            .then(result => location.reload())
+            .catch(error => console.log('error', error));
+        }
+
+        listUsers();
     </script>
 
 </body>

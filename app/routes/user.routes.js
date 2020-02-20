@@ -16,9 +16,9 @@ module.exports = (app) => {
     // Delete a User with userId
     app.delete('/users/:userId', users.delete);
 
-    //View
+    //Views
     app.get('/users-ui/', users.list);
 
-    //app.post('/users/add', users.add);
+    app.post('/users-ui/', users.add);
 
 }
