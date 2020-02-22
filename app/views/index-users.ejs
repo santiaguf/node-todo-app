@@ -115,14 +115,12 @@
 
             fetch("/users", requestOptions)
             .then(response => response.text())
-            .then(result => console.log(result))
+            .then(result => location.reload())
             .catch(error => console.log('error', error));
         }
 
         // delete an user
         function deleteUser(user_id){
-            console.log("velo");
-            console.log(user_id);
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
 

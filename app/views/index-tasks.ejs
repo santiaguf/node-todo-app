@@ -57,6 +57,7 @@
         </div>
 
         <div class="row">
+            <hr>
             <a href="/users-ui/" class="btn btn-info">Back to User list</a>
         </div>
 
@@ -130,12 +131,27 @@
 
             fetch("/tasks", requestOptions)
             .then(response => response.text())
-            .then(result => console.log(result))
+            .then(result => location.reload())
             .catch(error => console.log('error', error));
         }
 
-        function deleteTask(){
+        // delete a task
+        function deleteTask(task_id){
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
 
+            var raw = "";
+            var requestOptions = {
+            method: 'DELETE',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+            };
+
+            fetch("/tasks/"+task_id, requestOptions)
+            .then(response => response.text())
+            .then(result => location.reload())
+            .catch(error => console.log('error', error));
         }
 
         listTasksByUserId();
