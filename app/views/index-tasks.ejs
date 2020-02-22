@@ -28,9 +28,12 @@
                         <strong>Create Task</strong>
                         <form method="post">
                             <div class="form-group">
-                                <input class="form-control" type="text" name="name" id="user_name" placeholder="Name">
+                                <input class="form-control" type="text" name="description" id="description" placeholder="Description">
                             </div>
-                            <button class="btn btn-success" onclick="saveUser()">save</button>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="state" id="state" placeholder="State">
+                            </div>
+                            <button class="btn btn-success" onclick="saveTask()">save</button>
                         </form>
                     </div>
                 </div>
@@ -60,7 +63,7 @@
     </div>
     <script type="text/javascript">
         
-        //list users
+        // list users
         function listTasksByUserId(){
 
             function createNode(element) {
@@ -71,7 +74,7 @@
                 return parent.appendChild(el);
             }
 
-            //get user id by removing /tasks/user/ from String
+            // get user id by removing /tasks/user/ from String
             let user_id = window.location.pathname.substr(15);
 
             const tbody = document.getElementById('user_tasks');
@@ -106,6 +109,29 @@
             .catch(function(error) {
                 console.log(error);
             });
+        }
+
+        // save a task
+        function saveTask(){          
+            let description = document.getElementById('description').value 
+            let state = document.getElementById('state').value
+            let user_id = window.location.pathname.substr(15);
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({"description":description,"state":state,"user_id":user_id});
+
+            var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+            };
+
+            fetch("/tasks", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
         }
 
         function deleteTask(){

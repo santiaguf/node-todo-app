@@ -21,4 +21,7 @@ module.exports = (app) => {
 
     //Views for frontend
     app.get('/tasks-ui/user/:userId', tasks.list_ui);
+
+    app.post('/tasks-ui/user/:userId', tasks.list_ui);
+
 }

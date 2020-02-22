@@ -55,7 +55,7 @@
     </div>
     <script type="text/javascript">
         
-        //list users
+        // list users
         function listUsers(){
 
             function createNode(element) {
@@ -98,7 +98,7 @@
             });
         }
 
-        //save a user
+        // save an user
         function saveUser(){          
             let user_name = document.getElementById('user_name').value 
             var myHeaders = new Headers();
@@ -119,7 +119,7 @@
             .catch(error => console.log('error', error));
         }
 
-        //delete a user
+        // delete an user
         function deleteUser(user_id){
             console.log("velo");
             console.log(user_id);
