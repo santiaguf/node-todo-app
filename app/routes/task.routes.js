@@ -19,4 +19,6 @@ module.exports = (app) => {
     // Retrieve all Task by user
     app.get('/tasks/user/:userId', tasks.findByUserId);
 
+    //Views for frontend
+    app.get('/tasks-ui/user/:userId', tasks.list_ui);
 }

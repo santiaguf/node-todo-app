@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Todo App</title>
+    <!-- BOOTSTRAP CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <a class="navbar-brand" href="#">Todo App</a>
+    </nav>
+
+    <div class="container">
+
+        <div class="row">
+            <h1>Tasks list</h1>
+        </div>
+
+        <div class="row">
+            <!--FORM-->
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <strong>Create Task</strong>
+                        <form method="post">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="name" id="user_name" placeholder="Name">
+                            </div>
+                            <button class="btn btn-success" onclick="saveUser()">save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LIST -->
+            <div class="col-md-7">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Description</th>
+                            <th>State</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user_tasks">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <a href="/users-ui/" class="btn btn-info">Back to User list</a>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        
+        //list users
+        function listTasksByUserId(){
+
+            function createNode(element) {
+                return document.createElement(element);
+            }
+        
+            function append(parent, el) {
+                return parent.appendChild(el);
+            }
+
+            //get user id by removing /tasks/user/ from String
+            let user_id = window.location.pathname.substr(15);
+
+            const tbody = document.getElementById('user_tasks');
+            const url = '/tasks/user/'+ user_id;
+            fetch(url)
+            .then((resp) => resp.json())
+            .then(function(data) {
+                let user_tasks = data;
+                let totalTasks = 0;
+                return user_tasks.map(function(task) {
+                totalTasks++;    
+                let tr = createNode('tr'),
+                    td = createNode('td'),
+                    td2 = createNode('td');
+                    td3 = createNode('td');
+                    td4 = createNode('td');
+                //put content on TD elements    
+                td.innerHTML = `${totalTasks}`;
+                td2.innerHTML = `${task.description}`;
+                td3.innerHTML = `${task.state}`;
+                td4.innerHTML = `
+                <a href="/users-ui/edit/${task._id}" class="btn btn-warning">Edit</a> 
+                <a href="#" class="btn btn-danger" onclick="deleteTask('${task._id}')">Delete</a>`;
+                //append TD on TR
+                append(tr, td);
+                append(tr, td2);
+                append(tr, td3);
+                append(tr, td4);
+                append(tbody, tr);
+                })
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+        }
+
+        function deleteTask(){
+
+        }
+
+        listTasksByUserId();
+    </script>
+
+</body>
+
+</html>    

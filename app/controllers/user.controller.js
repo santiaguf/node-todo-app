@@ -116,7 +116,7 @@ exports.delete = (req, res) => {
 exports.list_ui = (req, res) => {
     User.find()
     .then(users => {
-        res.render('index', {
+        res.render('index-users', {
             //users
         });
     }).catch(err => {

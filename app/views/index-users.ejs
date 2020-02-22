@@ -17,10 +17,15 @@
     <div class="container">
 
         <div class="row">
+            <h1>Users List</h1>
+        </div>
+
+        <div class="row">
             <!--FORM-->
             <div class="col-md-5">
                 <div class="card">
                     <div class="card-body">
+                        <strong>Create User</strong>
                         <form method="post">
                             <div class="form-group">
                                 <input class="form-control" type="text" name="name" id="user_name" placeholder="Name">
@@ -78,7 +83,7 @@
                 td.innerHTML = `${totalUsers}`;
                 td2.innerHTML = `${author.name}`;
                 td3.innerHTML = `
-                <a href="/users-ui/tasklist/${author._id}" class="btn btn-info">Tasks</a> 
+                <a href="/tasks-ui/user/${author._id}" class="btn btn-info">Tasks</a> 
                 <a href="/users-ui/edit/${author._id}" class="btn btn-warning">Edit</a> 
                 <a href="#" class="btn btn-danger" onclick="deleteUser('${author._id}')">Delete</a>`;
                 //append TD on TR
