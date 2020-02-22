@@ -16,9 +16,13 @@ module.exports = (app) => {
     // Delete a User with userId
     app.delete('/users/:userId', users.delete);
 
-    //Views
-    app.get('/users-ui/', users.list);
+    //Views for frontend
+    app.get('/users-ui/', users.list_ui);
 
-    app.post('/users-ui/', users.add);
+    app.post('/users-ui/', users.list_ui);
+
+    app.get('/users-ui/edit/:userId', users.edit_ui);
+
+    //app.post('/users-ui/edit/:userId', users.update_ui);
 
 }

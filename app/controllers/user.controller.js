@@ -113,11 +113,11 @@ exports.delete = (req, res) => {
     });
 };
 
-exports.list = (req, res) => {
+exports.list_ui = (req, res) => {
     User.find()
     .then(users => {
         res.render('index', {
-            users
+            //users
         });
     }).catch(err => {
         res.status(500).send({
@@ -126,12 +126,11 @@ exports.list = (req, res) => {
     });
 };
 
-
-exports.add = (req, res) => {
-    User.find()
-    .then(users => {
-        res.render('index', {
-            users
+exports.edit_ui = (req, res) => {
+    User.findById(req.params.userId)
+    .then(user => {
+        res.render('edit', {
+            user
         });
     }).catch(err => {
         res.status(500).send({

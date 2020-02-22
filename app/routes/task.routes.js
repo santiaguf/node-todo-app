@@ -16,4 +16,7 @@ module.exports = (app) => {
     // Delete a Task with taskId
     app.delete('/tasks/:taskId', tasks.delete);
 
+    // Retrieve all Task by user
+    app.get('/tasks/user/:userId', tasks.findByUserId);
+
 }

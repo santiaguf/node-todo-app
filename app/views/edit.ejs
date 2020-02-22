@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Todo App</title>
+    <!-- BOOTSTRAP CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <a class="navbar-brand" href="#">Todo App</a>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <!--FORM-->
+            <div class="col-md-5 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/edit/<%= user._id %>" method="post">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="title" placeholder="Title" value="<%= user.name %>">
+                            </div>
+                            <button class="btn btn-primary" type="submit">Update </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <script type="text/javascript">
+        
+        //list users
+        function listUsers(){
+
+            function createNode(element) {
+                return document.createElement(element);
+            }
+        
+            function append(parent, el) {
+                return parent.appendChild(el);
+            }
+        
+            const tbody = document.getElementById('users_list');
+            const url = '/users';
+            fetch(url)
+            .then((resp) => resp.json())
+            .then(function(data) {
+                let users_list = data;
+                let totalUsers = 0;
+                return users_list.map(function(author) {
+                totalUsers++;    
+                let tr = createNode('tr'),
+                    td = createNode('td'),
+                    td2 = createNode('td');
+                    td3 = createNode('td');
+                //put content on TD elements    
+                td.innerHTML = `${totalUsers}`;
+                td2.innerHTML = `${author.name}`;
+                td3.innerHTML = `
+                <a href="/users-ui/tasklist/${author._id}" class="btn btn-info">Tasks</a> 
+                <a href="/users-ui/edit/${author._id}" class="btn btn-warning">Edit</a> 
+                <a href="#" class="btn btn-danger" onclick="deleteUser('${author._id}')">Delete</a>`;
+                //append TD on TR
+                append(tr, td);
+                append(tr, td2);
+                append(tr, td3);
+                append(tbody, tr);
+                })
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+        }
+
+        //save a user
+        function saveUser(){          
+            let user_name = document.getElementById('user_name').value 
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({"name":user_name});
+
+            var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+            };
+
+            fetch("/users", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+        }
+
+        //listUsers();
+    </script>
+
+</body>
+
+</html>    
