@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Todo App</title>
+    <!-- BOOTSTRAP CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <a class="navbar-brand" href="#">Todo App</a>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <!--FORM-->
+            <div class="col-md-5 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="description"  id="description"  placeholder="description" value="">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="state"  id="state"  placeholder="state" value="">
+                            </div>
+                            <div class="form-group"> 
+                                <input type="hidden" name="user_id" id="user_id" value="">
+                            </div>
+                            <button class="btn btn-primary" type="submit" onclick="updateTask()">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <script type="text/javascript">
+        
+        //Get task details
+        function getTask(){        
+            // get taskid by removing /tasks/user/ from String
+            let task_id = window.location.pathname.substr(15);
+
+            const url = '/tasks/'+task_id;
+            fetch(url)
+            .then((resp) => resp.json())
+            .then(function(data) {
+                //get values
+                let description = data.description
+                let state = data.state
+                let user_id = data.user_id
+                //put it into input value
+                document.getElementById("description").value = description
+                document.getElementById("state").value = state
+                document.getElementById("user_id").value = user_id
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+        }
+
+        // save a task
+        function updateTask(){  
+            // get taskid by removing /tasks/user/ from String
+            let task_id = window.location.pathname.substr(15);  
+            let user_id = document.getElementById('user_id').value  
+            let description = document.getElementById('description').value 
+            let state = document.getElementById('state').value
+            
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({"description":description,"state":state,"user_id":user_id});
+
+            var requestOptions = {
+            method: 'PUT',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+            };
+
+            fetch("/tasks/"+task_id, requestOptions)
+            .then(response => response.text())
+            .then(result => location.replace("/tasks-ui/user/"+user_id))
+            .catch(error => console.log('error', error));
+        }
+
+        getTask();
+    </script>
+
+</body>
+
+</html>    

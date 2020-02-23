@@ -97,7 +97,7 @@
                 td2.innerHTML = `${task.description}`;
                 td3.innerHTML = `${task.state}`;
                 td4.innerHTML = `
-                <a href="/users-ui/edit/${task._id}" class="btn btn-warning">Edit</a> 
+                <a href="/tasks-ui/edit/${task._id}" class="btn btn-warning">Edit</a> 
                 <a href="#" class="btn btn-danger" onclick="deleteTask('${task._id}')">Delete</a>`;
                 //append TD on TR
                 append(tr, td);

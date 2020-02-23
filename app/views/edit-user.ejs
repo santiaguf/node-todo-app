@@ -57,9 +57,9 @@
         function updateUser(){    
             let user_id = window.location.pathname.substr(15);      
             let user_name = document.getElementById('user_name').value 
-            var myHeaders = new Headers();
+            
+            var myHeaders = new Headers(); 
             myHeaders.append("Content-Type", "application/json");
-
             var raw = JSON.stringify({"name":user_name});
 
             var requestOptions = {

@@ -149,3 +149,19 @@ exports.list_ui = (req, res) => {
         });
     });
 };
+
+exports.edit_ui = (req, res) => {
+    Task.find({ user_id: req.params.taskId})
+    .then(tasks => {
+        res.render('edit-task', { });
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Tasks not found for user ID " + req.params.userId
+            });                
+        }
+        return res.status(500).send({
+            message: "Error retrieving tasks for user ID " + req.params.userId
+        });
+    });
+};
