@@ -129,8 +129,8 @@ exports.list_ui = (req, res) => {
 exports.edit_ui = (req, res) => {
     User.findById(req.params.userId)
     .then(user => {
-        res.render('edit', {
-            user
+        res.render('edit-user', { 
+            //user 
         });
     }).catch(err => {
         res.status(500).send({

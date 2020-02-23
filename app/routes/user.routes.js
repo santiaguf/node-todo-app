@@ -21,6 +21,4 @@ module.exports = (app) => {
 
     app.get('/users-ui/edit/:userId', users.edit_ui);
 
-    //app.post('/users-ui/edit/:userId', users.update_ui);
-
 }

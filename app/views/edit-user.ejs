@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Todo App</title>
+    <!-- BOOTSTRAP CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <a class="navbar-brand" href="#">Todo App</a>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <!--FORM-->
+            <div class="col-md-5 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="user_name"  id="user_name"  placeholder="Name" value="">
+                            </div>
+                            <button class="btn btn-primary" type="submit" onclick="updateUser()">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <script type="text/javascript">
+        
+        //list users
+        function getUser(){        
+            // get user id by removing /tasks/user/ from String
+            let user_id = window.location.pathname.substr(15);
+
+            const url = '/users/'+user_id;
+            fetch(url)
+            .then((resp) => resp.json())
+            .then(function(data) {
+                //get User name
+                let user_name = data.name;
+                //put it into input value
+                document.getElementById("user_name").value = user_name;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+        }
+
+        // save an user
+        function updateUser(){    
+            let user_id = window.location.pathname.substr(15);      
+            let user_name = document.getElementById('user_name').value 
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({"name":user_name});
+
+            var requestOptions = {
+            method: 'PUT',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+            };
+
+            fetch("/users/"+user_id, requestOptions)
+            .then(response => response.text())
+            .then(result => location.replace("/users-ui/"))
+            .catch(error => console.log('error', error));
+        }
+
+        getUser();
+    </script>
+
+</body>
+
+</html>    
