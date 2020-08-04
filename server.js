@@ -2,6 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
+//environment variables
+require('dotenv').config();
+const dbUrl = process.env.DB_URL;
+const port = process.env.PORT;
+
+
 // create express app
 const app = express();
 
@@ -15,17 +21,16 @@ app.use(bodyParser.json())
 app.set('views', path.join(__dirname + '/app/views'));
 app.set('view engine', 'ejs');
 
-// Configuring the database
-const dbConfig = require('./config/database.config.js');
+// Mongoose require
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
 // Connecting to the database
-mongoose.connect(dbConfig.url, {
+mongoose.connect(dbUrl, {
     useNewUrlParser: true
 }).then(() => {
-    console.log("Successfully connected to the database");    
+    console.log("Successfully connected to the database");
 }).catch(err => {
     console.log('Could not connect to the database. Exiting now...', err);
     process.exit();
@@ -43,6 +48,6 @@ require('./app/routes/user.routes.js')(app);
 require('./app/routes/task.routes.js')(app);
 
 // listen for requests
-app.listen(3005, () => {
-    console.log("Server is listening on port 3005");
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
 });
