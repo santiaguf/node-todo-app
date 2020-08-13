@@ -65,7 +65,7 @@
             let user_id = window.location.pathname.substr(15);
 
             const tbody = document.getElementById('user_tasks');
-            const url = '/tasks/user/'+ user_id;
+            const url = '/v1/tasks/user/'+ user_id;
             fetch(url)
             .then((resp) => resp.json())
             .then(function(data) {
@@ -115,7 +115,7 @@
             redirect: 'follow'
             };
 
-            fetch("/tasks", requestOptions)
+            fetch("/v1/tasks", requestOptions)
             .then(response => response.text())
             .then(result => location.reload())
             .catch(error => console.log('error', error));
@@ -134,7 +134,7 @@
             redirect: 'follow'
             };
 
-            fetch("/tasks/"+task_id, requestOptions)
+            fetch("/v1/tasks/"+task_id, requestOptions)
             .then(response => response.text())
             .then(result => location.reload())
             .catch(error => console.log('error', error));

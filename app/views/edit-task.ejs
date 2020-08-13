@@ -32,7 +32,7 @@
             // get taskid by removing /tasks/user/ from String
             let task_id = window.location.pathname.substr(15);
 
-            const url = '/tasks/'+task_id;
+            const url = '/v1/tasks/'+task_id;
             fetch(url)
             .then((resp) => resp.json())
             .then(function(data) {
@@ -73,7 +73,7 @@
             redirect: 'follow'
             };
 
-            fetch("/tasks/"+task_id, requestOptions)
+            fetch("/v1/tasks/"+task_id, requestOptions)
             .then(response => response.text())
             .then(result => location.replace("/tasks-ui/user/"+user_id))
             .catch(error => console.log('error', error));

@@ -53,7 +53,7 @@
             }
         
             const tbody = document.getElementById('users_list');
-            const url = '/users';
+            const url = '/v1/users';
             fetch(url)
             .then((resp) => resp.json())
             .then(function(data) {
@@ -85,8 +85,8 @@
         }
 
         // save an user
-        function saveUser(){          
-            let user_name = document.getElementById('user_name').value 
+        function saveUser(){
+            let user_name = document.getElementById('user_name').value
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
 
@@ -99,7 +99,7 @@
             redirect: 'follow'
             };
 
-            fetch("/users", requestOptions)
+            fetch("/v1/users", requestOptions)
             .then(response => response.text())
             .then(result => location.reload())
             .catch(error => console.log('error', error));
@@ -118,7 +118,7 @@
             redirect: 'follow'
             };
 
-            fetch("/users/"+user_id, requestOptions)
+            fetch("/v1/users/"+user_id, requestOptions)
             .then(response => response.text())
             .then(result => location.reload())
             .catch(error => console.log('error', error));

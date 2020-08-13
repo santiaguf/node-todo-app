@@ -26,7 +26,7 @@
             // get user id by removing /tasks/user/ from String
             let user_id = window.location.pathname.substr(15);
 
-            const url = '/users/'+user_id;
+            const url = '/v1/users/'+user_id;
             fetch(url)
             .then((resp) => resp.json())
             .then(function(data) {
@@ -56,7 +56,7 @@
             redirect: 'follow'
             };
 
-            fetch("/users/"+user_id, requestOptions)
+            fetch("/v1/users/"+user_id, requestOptions)
             .then(response => response.text())
             .then(result => location.replace("/users-ui/"))
             .catch(error => console.log('error', error));
