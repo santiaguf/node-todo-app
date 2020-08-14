@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const favicon = require('serve-favicon')
 
 //environment variables
 require('dotenv').config();
@@ -10,6 +11,9 @@ const port = process.env.PORT;
 
 // create express app
 const app = express();
+
+//favicon
+app.use(favicon(path.join(__dirname, 'app','views', 'favicon.ico')))
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
