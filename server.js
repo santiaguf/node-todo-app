@@ -10,7 +10,6 @@ const favicon = require('serve-favicon');
 const dbUrl = process.env.DB_URL;
 const port = process.env.PORT;
 
-
 // create express app
 const app = express();
 
