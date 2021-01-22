@@ -1,10 +1,12 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const favicon = require('serve-favicon');
 
 //environment variables
-require('dotenv').config();
+//require('dotenv').config();
 const dbUrl = process.env.DB_URL;
 const port = process.env.PORT;
 
