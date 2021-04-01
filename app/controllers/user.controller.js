@@ -70,7 +70,7 @@ exports.update = (req, res) => {
 
   // Find user and update it with the request body
   User.findByIdAndUpdate(req.params.userId, {
-    name: req.body.name || 'Unknown User',
+    name: req.body.name.trim() || 'Unknown User',
   }, { new: true })
     .then((user) => {
       if (!user) {

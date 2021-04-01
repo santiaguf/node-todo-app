@@ -72,7 +72,7 @@ exports.update = (req, res) => {
 
   // Find task and update it with the request body
   Task.findByIdAndUpdate(req.params.taskId, {
-    description: req.body.description || 'Unknown task',
+    description: req.body.description.trim() || 'Unknown task',
     state: req.body.state,
     user_id: req.body.user_id,
   }, { new: true })
