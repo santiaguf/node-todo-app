@@ -22,20 +22,20 @@
     "bl": "^2.2.1",
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
-    "dotenv": "^8.2.0",
-    "ejs": "^3.1.5",
+    "dotenv": "^8.6.0",
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "mongoose": "^5.11.13",
+    "mongoose": "^5.13.7",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.23.0",
+    "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "^2.24.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.23.1",
-    "nodemon": "^2.0.7"
+    "eslint-plugin-react": "^7.24.0",
+    "nodemon": "^2.0.12"
   }
 }
