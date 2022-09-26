@@ -1,4 +1,4 @@
-module.exports = (app) => {
+export default (app) => {
   const tasks = require('../controllers/task.controller.js');
 
   // Create a new Task
