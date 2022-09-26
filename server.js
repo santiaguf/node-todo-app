@@ -8,7 +8,8 @@ import path from 'path';
 import favicon from 'serve-favicon';
 import {fileURLToPath} from 'url';
 import { dirname } from 'path';
-import { listUI, editUI } from './app/controllers/user.controller.js';
+import { listUserUI, editUserUI } from './app/controllers/user.controller.js';
+import { listTaskUI, editTaskUI } from './app/controllers/task.controller.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -21,6 +22,7 @@ const port = process.env.PORT;
 const app = express();
 
 import v1UserRouter from './app/routes/user.routes.js';
+import v1TaskRouter from './app/routes/task.routes.js';
 
 // favicon
 app.use(favicon(path.join(__dirname, 'app', 'views', 'favicon.ico')));
@@ -55,13 +57,15 @@ app.get('/', (req, res) => {
 
 // Require User routes
 app.use("/v1/users", v1UserRouter);
+app.use("/v1/tasks", v1TaskRouter);
 
 // Views for frontend
-app.get('/users-ui/', listUI);
-app.get('/users-ui/edit/:userId', editUI);
+app.get('/users-ui/', listUserUI);
+app.get('/users-ui/edit/:userId', editUserUI);
 
-// Require Task routes
-//require('./app/routes/task.routes.js').default(app);
+app.get('/tasks-ui/user/:userId', listTaskUI);
+app.get('/tasks-ui/edit/:taskId', editTaskUI);
+
 
 // listen for requests
 app.listen(port, () => {

@@ -113,7 +113,7 @@ export function remove(req, res) {
     });
 };
 
-export function listUI(req, res) {
+export function listUserUI(req, res) {
   User.find()
     .then((users) => {
       res.render('index-users', {
@@ -126,7 +126,7 @@ export function listUI(req, res) {
     });
 }
 
-export function editUI(req, res) {
+export function editUserUI(req, res) {
   User.findById(req.params.userId)
     .then((user) => {
       res.render('edit-user', {

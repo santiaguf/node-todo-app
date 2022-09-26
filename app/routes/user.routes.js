@@ -2,7 +2,6 @@ import {create, findAll, findOne, update, remove } from '../controllers/user.con
 
 import express from 'express';
 const router = express.Router();
-const app = express();
 
 router.
   get('/', findAll).

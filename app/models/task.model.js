@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const TaskSchema = mongoose.Schema({
+const TaskSchema = Schema({
   description: String,
   state: String,
-  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  user_id: { type: Schema.Types.ObjectId, ref: 'User' },
 }, {
   timestamps: true,
 });
 
-module.exports = mongoose.model('Task', TaskSchema);
+export default model('Task', TaskSchema);
