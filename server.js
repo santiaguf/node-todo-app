@@ -1,39 +1,47 @@
 /* eslint-disable no-console */
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
-const favicon = require('serve-favicon');
+import express, {urlencoded, json} from 'express';
 
-// environment variables
-// require('dotenv').config();
+import path from 'path';
+import favicon from 'serve-favicon';
+import {fileURLToPath} from 'url';
+import { dirname } from 'path';
+import { listUserUI, editUserUI } from './app/controllers/user.controller.js';
+import { listTaskUI, editTaskUI } from './app/controllers/task.controller.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+
 const dbUrl = process.env.DB_URL;
 const port = process.env.PORT;
 
 // create express app
 const app = express();
 
+import v1UserRouter from './app/routes/user.routes.js';
+import v1TaskRouter from './app/routes/task.routes.js';
+
 // favicon
 app.use(favicon(path.join(__dirname, 'app', 'views', 'favicon.ico')));
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(urlencoded({ extended: true }));
 
 // parse requests of content-type - application/json
-app.use(bodyParser.json());
+app.use(json());
 
 // settings for Ejs
 app.set('views', path.join(`${__dirname}/app/views`));
 app.set('view engine', 'ejs');
 
 // Mongoose require
-const mongoose = require('mongoose');
-
-mongoose.Promise = global.Promise;
+import { connect } from 'mongoose';
 
 // Connecting to the database
-mongoose.connect(dbUrl, {
+connect(dbUrl, {
   useNewUrlParser: true,
 }).then(() => {
   console.log('Successfully connected to the database');
@@ -48,10 +56,16 @@ app.get('/', (req, res) => {
 });
 
 // Require User routes
-require('./app/routes/user.routes.js')(app);
+app.use("/v1/users", v1UserRouter);
+app.use("/v1/tasks", v1TaskRouter);
 
-// Require Task routes
-require('./app/routes/task.routes.js')(app);
+// Views for frontend
+app.get('/users-ui/', listUserUI);
+app.get('/users-ui/edit/:userId', editUserUI);
+
+app.get('/tasks-ui/user/:userId', listTaskUI);
+app.get('/tasks-ui/edit/:taskId', editTaskUI);
+
 
 // listen for requests
 app.listen(port, () => {

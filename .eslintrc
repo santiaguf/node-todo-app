@@ -1,6 +1,7 @@
 {
   "extends": ["airbnb"],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
+  "requireConfigFile": false,
   "globals": {
       "document": true,
       "foo": true,

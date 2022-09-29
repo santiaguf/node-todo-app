@@ -1,7 +1,7 @@
-const Task = require('../models/task.model.js');
+import Task from '../models/task.model.js';
 
 // Create and Save a new Task
-exports.create = (req, res) => {
+export function create(req, res) {
   // Validate request
   if (!req.body.description || !req.body.state || !req.body.user_id) {
     return res.status(400).send({
@@ -25,10 +25,10 @@ exports.create = (req, res) => {
         message: err.message || 'Some error occurred while creating task.',
       });
     });
-};
+}
 
 // Retrieve and return all tasks from the database.
-exports.findAll = (req, res) => {
+export function findAll(req, res) {
   Task.find()
     .then((tasks) => {
       res.send(tasks);
@@ -37,10 +37,10 @@ exports.findAll = (req, res) => {
         message: err.message || 'Some error occurred while retrieving tasks.',
       });
     });
-};
+}
 
 // Find a single task with a taskId
-exports.findOne = (req, res) => {
+export function findOne(req, res) {
   Task.findById(req.params.taskId)
     .then((task) => {
       if (!task) {
@@ -59,10 +59,10 @@ exports.findOne = (req, res) => {
         message: `Error retrieving task with id ${req.params.taskId}`,
       });
     });
-};
+}
 
 // Update a task identified by the taskId in the request
-exports.update = (req, res) => {
+export function update(req, res) {
   // Validate Request
   if (!req.body.description || !req.body.state || !req.body.user_id) {
     return res.status(400).send({
@@ -93,10 +93,10 @@ exports.update = (req, res) => {
         message: `Error updating task with id ${req.params.taskId}`,
       });
     });
-};
+}
 
 // Delete a task with the specified taskId in the request
-exports.delete = (req, res) => {
+export function remove (req, res) {
   Task.findByIdAndRemove(req.params.taskId)
     .then((task) => {
       if (!task) {
@@ -118,7 +118,7 @@ exports.delete = (req, res) => {
 };
 
 // Retrieve all Task by user
-exports.findByUserId = (req, res) => {
+export function findByUserId(req, res) {
   Task.find({ user_id: req.params.userId })
     .then((tasks) => {
       res.send(tasks);
@@ -132,9 +132,9 @@ exports.findByUserId = (req, res) => {
         message: `Error retrieving tasks for user ID ${req.params.userId}`,
       });
     });
-};
+}
 
-exports.list_ui = (req, res) => {
+export function listTaskUI(req, res) {
   Task.find({ user_id: req.params.userId })
     .then((tasks) => {
       res.render('index-tasks', { });
@@ -148,9 +148,9 @@ exports.list_ui = (req, res) => {
         message: `Error retrieving tasks for user ID ${req.params.userId}`,
       });
     });
-};
+}
 
-exports.edit_ui = (req, res) => {
+export function editTaskUI(req, res) {
   Task.find({ user_id: req.params.taskId })
     .then((tasks) => {
       res.render('edit-task', { });
@@ -164,4 +164,4 @@ exports.edit_ui = (req, res) => {
         message: `Error retrieving tasks for user ID ${req.params.userId}`,
       });
     });
-};
+}

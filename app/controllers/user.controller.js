@@ -1,7 +1,7 @@
-const User = require('../models/user.model.js');
+import User from '../models/user.model.js';
 
 // Create and Save a new User
-exports.create = (req, res) => {
+export function create(req, res) {
   // Validate request
   if (!req.body.name) {
     return res.status(400).send({
@@ -23,10 +23,10 @@ exports.create = (req, res) => {
         message: err.message || 'Some error occurred while creating user.',
       });
     });
-};
+}
 
 // Retrieve and return all users from the database.
-exports.findAll = (req, res) => {
+export function findAll(req, res) {
   User.find()
     .then((users) => {
       res.send(users);
@@ -35,10 +35,10 @@ exports.findAll = (req, res) => {
         message: err.message || 'Some error occurred while retrieving users.',
       });
     });
-};
+}
 
 // Find a single user with a userId
-exports.findOne = (req, res) => {
+export function findOne(req, res) {
   User.findById(req.params.userId)
     .then((user) => {
       if (!user) {
@@ -57,10 +57,10 @@ exports.findOne = (req, res) => {
         message: `Error retrieving user with id ${req.params.userId}`,
       });
     });
-};
+}
 
 // Update a user identified by the userId in the request
-exports.update = (req, res) => {
+export function update(req, res) {
   // Validate Request
   if (!req.body.name) {
     return res.status(400).send({
@@ -89,10 +89,10 @@ exports.update = (req, res) => {
         message: `Error updating user with id ${req.params.userId}`,
       });
     });
-};
+}
 
 // Delete a user with the specified userId in the request
-exports.delete = (req, res) => {
+export function remove(req, res) {
   User.findByIdAndRemove(req.params.userId)
     .then((user) => {
       if (!user) {
@@ -113,7 +113,7 @@ exports.delete = (req, res) => {
     });
 };
 
-exports.list_ui = (req, res) => {
+export function listUserUI(req, res) {
   User.find()
     .then((users) => {
       res.render('index-users', {
@@ -124,9 +124,9 @@ exports.list_ui = (req, res) => {
         message: err.message || 'Some error occurred while retrieving users.',
       });
     });
-};
+}
 
-exports.edit_ui = (req, res) => {
+export function editUserUI(req, res) {
   User.findById(req.params.userId)
     .then((user) => {
       res.render('edit-user', {
@@ -137,4 +137,4 @@ exports.edit_ui = (req, res) => {
         message: err.message || 'Some error occurred while retrieving users.',
       });
     });
-};
+}
