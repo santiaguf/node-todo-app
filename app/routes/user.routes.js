@@ -1,13 +1,12 @@
-import {create, findAll, findOne, update, remove } from '../controllers/user.controller.js';
+import { create, find, update, remove } from '../controllers/user.controller.js'
 
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-router.
-  get('/', findAll).
-  get('/:userId', findOne).
-  post('/', create).
-  put('/:userId', update).
-  delete('/:userId', remove);
+router
+  .get('/:userId', find)
+  .post('/', create)
+  .put('/:userId', update)
+  .delete('/:userId', remove)
 
-export default router;
+export default router
