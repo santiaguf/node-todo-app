@@ -1,14 +1,13 @@
-import {create, findAll, findOne, update, remove, findByUserId } from '../controllers/task.controller.js';
+import { create, find, update, remove } from '../controllers/task.controller.js'
 
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-router.
-  get('/', findAll).
-  get('/:taskId', findOne).
-  post('/', create).
-  put('/:taskId', update).
-  delete('/:taskId', remove).
-  get('/user/:userId', findByUserId);
+router
+  .get('/:taskId?', find)
+  .post('/', create)
+  .put('/:taskId', update)
+  .delete('/:taskId', remove)
+  .get('/user/:user_id?', find)
 
-export default router;
+export default router
