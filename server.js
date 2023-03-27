@@ -37,6 +37,9 @@ app.use(json());
 app.set('views', path.join(`${__dirname}/app/views`));
 app.set('view engine', 'ejs');
 
+// serving static files
+app.use(express.static(__dirname + '/app/public'));
+
 // Mongoose require
 import { connect } from 'mongoose';
 
