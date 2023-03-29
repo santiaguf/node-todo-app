@@ -100,9 +100,9 @@ div {
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #fffff;
+    background-color: #ffffff;
     background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
+    border : 1px solid rgba(0,0,0,.125);
     border-radius: 0.25rem;
 }
 .card-body {
@@ -148,6 +148,7 @@ form {
     border-radius: 0.25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     text-decoration: none;
+    margin-bottom: 1%;
 }
 .btn-info {
     color: #ffffff;
