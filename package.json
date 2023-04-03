@@ -19,6 +19,9 @@
     "Mongoose",
     "Todo"
   ],
+  "engines": { 
+    "node": "16.x" 
+  },
   "author": "Santiago Bernal",
   "license": "MIT",
   "dependencies": {
