@@ -276,7 +276,42 @@ table thead th {
 th {
     text-align: inherit;
 }
+hr {  
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+}
+hr {
+    display: block;
+    unicode-bidi: isolate;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    overflow: hidden;
+    border-style: inset;
+    border-width: 1px;
+}
+.row-btn{
+    display: flex;
+    
+}
+@media (max-width: 765px){
+    .container-index {
+        max-width: 540px;
+    }
+    .row1{
+        display:flex;
+        flex-wrap:wrap ;
+    }
 
+}
 
 
 
