@@ -157,15 +157,15 @@ form {
     margin-bottom: 1%;
 }
 .btn-info {
-    color: #ffffff;
-    background-color: #17a2b8;
-    border-color: #17a2b8;
+    color: #000000;
+    background-color: #36CFE8;
+    border-color: #36CFE8;
     text-decoration: none;
 }
 .btn-success{
     color: #fff;
-    background-color: #28a745;
-    border-color: #28a745;
+    background-color: #176324;
+    border-color: #176324;
 }
 .btn-warning{
     color: #070707;
