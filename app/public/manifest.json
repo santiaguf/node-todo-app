@@ -1,0 +1,63 @@
+{
+    "background_color": "#ffffff",
+    "description": "Node Todo App with nodeJs, eJs, expressJs and MongoDb.",
+    "dir": "ltr",
+    "display": "standalone",
+    "name": "Node ToDO app",
+    "orientation": "any",
+    "scope": "/",
+    "short_name": "nodetodoapp",
+    "start_url": "/",
+    "theme_color": "#ffffff",
+    "categories": [],
+    "screenshots": [],
+    "icons": [
+      {
+        "src": "img/favicon.ico",
+        "type": "image/x-icon"
+      },
+      {
+        "src": "img/android/android-launchericon-72-72.png",
+        "type": "image/png",
+        "sizes": "72x72",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "img/android/android-launchericon-96-96.png",
+        "type": "image/png",
+        "sizes": "96x96",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "img/ios/128.png",
+        "type": "image/png",
+        "sizes": "128x128",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "img/android/android-launchericon-144-144.png",
+        "type": "image/png",
+        "sizes": "144x144",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "img/ios/152.png",
+        "type": "image/png",
+        "sizes": "152x152",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "img/android/android-launchericon-192-192.png",
+        "type": "image/png",
+        "sizes": "192x192",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "img/android/android-launchericon-512-512.png",
+        "type": "image/png",
+        "sizes": "512x512",
+        "purpose": "any maskable"
+      }
+    ],
+    "shortcuts": []
+  }
