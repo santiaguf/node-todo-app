@@ -25,7 +25,7 @@ import v1UserRouter from './app/routes/user.routes.js';
 import v1TaskRouter from './app/routes/task.routes.js';
 
 // favicon
-app.use(favicon(path.join(__dirname, 'app', 'views', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'app', 'public', 'img', 'favicon.ico')));
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(urlencoded({ extended: true }));
