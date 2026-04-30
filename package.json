@@ -20,7 +20,7 @@
     "Todo"
   ],
   "engines": { 
-    "node": "16.x" 
+    "node": "24.x" 
   },
   "author": "Santiago Bernal",
   "license": "MIT",
